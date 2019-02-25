@@ -45,6 +45,7 @@
                 var missLetterStr = "";
                 var i = null;
                 var j = null;
+                var x = null;
  
         //      
                 if(typeof(saves) != "undefined" && typeof(hangs) !="undefined"){
@@ -82,6 +83,7 @@
                 
                 var gwLength = arrayGW.length;
                 var guessCount = gwLength+5;
+                document.getElementById("guess-remain").innerHTML=guessCount;
 
         //      (1.6) Create gameBoard
                 
@@ -111,8 +113,6 @@
 
         //      (2) gamePlay()
         //
-        //      when a guessLetter is played, two (2) For...Loops with a nested If...Else to determine if guessletter is in the
-        //      missLetter or gameBoard already...if it is in either case, then an alert to inform the player of this event.
                 
                 alert("This is Hip Hop Hangman. Words are selected at random from titles of my favorite songs. Guess a letter to begin but be mindful of how many guess attempts you have renaining!");
 
@@ -131,45 +131,82 @@
         //      when a letter that is pressed, for the entirety of the word, check if it matches one of the letters 
         //      for(i=0; i<arrayGW.length-1;i++){
         //  
+        //      WHEN guessLetter HAS ALREADY BEEN PLAYED
         //
-        //              IF THE LETTER HAS ALREADY BEEN PLAYED
-        //              if (guessLetter letter already in gameBoard || guessLetter already in incorrect-letters array){
-        //                      prompt("The letter___ is already in-play. Please choose again.)
-        //
-        //              --> really would like to create an in-game counter that penalizes the player for guessing the 
-        //                      same letter 3x or more
+        //      for(j=0; x<gameBoard.length; j++){
+        //              
+        //              if(guessletter == gameBoard[i]){
+        //                      
+        //                      alert("The entrty is already on the game board. Please choose again.")};      
         //
         //              }
-        //              ELSE guessLetter EQUALS an indexed position in the array
-        //              else (guessLetter == arrayGW[i]){
         //              
-        //              (a) perform replace method on gameBoard to swap the existing "_" in the matching indexed spot of
-        //              the array (b) programmatically change the HTML element by ID to reflect the update spelling of
-        //              the gameBoard
-        //              } 
+        //      for(x=0; x<missLetter.length; x++){
+        //                      
+        //      --> need to develop an in-game penalty of -1 guessCount when guessing the same letter 3x or more times
+        //              if(guessLetter == missLetter[i]){
+        //        
+        //                      alert("The entry has already been played and was incorrect. Please choose again.")};
+        //      
         //
-        //              ELSE guessLetter is incorrect
-        //              else(guessLetter <> arrayGW[i]){
+        //      }
+        //      
+        //      WHEN guessLetter EQUALS AN INDEXED VALUE IN arrayGW
+        //      (a) perform replace method on gameBoard to swap the existing "_" in the matching indexed spot of the 
+        //      array AND (b) programmatically edit the HTML element by ID to reflect the updated missing/showing on 
+        //      the gameBoard
+        //
+        //      for(i=0; i<arrayGW.length-1;i++){
         //              
-        //
-        //              (a) add letter to incorrect letters array, (b) programmatically change the HTML element by ID
-        //               to reflect the updated list of incorrect letters and; (c) reduce the guessCount by 1
+        //              guessLetter is CORRECT
+        //              if(guessLetter == arrayGW[i]){
 
+        //                      gameBoard.splice(i,0,guessLetter)
+        //                      gameBoardStr = gameBoard.toString();
+        //                      console.log(gameBoard);
+        //                      console.log(gameBoardStr);
+        //
+        //                      document.getElementById("correct_letters").innerHTML=gameBoardStr;
+        //      
+        //      OR WHEN IT DOES NOT (missLetter)
+        //      (a) add letter to incorrect letters array, (b) programmatically change the HTML element by ID
+        //       to reflect the updated list of incorrect letters and; (c) reduce the guessCount by 1
+        //
+        //              ELSE guessLetter is INCORRECT
+        //              }else(guessLetter <> arrayGW[i]){
+        //                      
+        //                      missLetter.push(guessletter & " ")
+        //                      missLetterStr = missLetters.toString
+        //                      document.getElementById("incorrect_letters").innerHTML=missLetterStr;
+        //                      
+        //                      guessCount--
+        //                      document.getElementById("guess-remain").innerHTML=guessCount
         //              }
-        //     
+        //      };
+        //      
+        //              
         //      Need more if(){}else(){} statements here to accomplish the follwing:
         //
         //              (1) if (guessCount goes to 0) then call gameEnd(){}
+        //              if(guessCount=0){
+        //
+        //                 gameEnd()
+        //
+        //              }
         //              (2) else(most recent guessLetter completes the word, call gameEnd()){}
+        //
         //              (3) else(guess again-->call the function gamePlay() until (1) or (2) are satisfied){}
         //       
         //
         //      (3) gameEnd
         //      
-        //      if there are any "_" remaining in gameBoard and guessCount=0 when this fucntion is called, then the game is
-        //      over and Hangman count +1
+        //      if there are any "_" remaining in gameBoard and guessCount=0 when this function is called, then the 
+        //      game is over and hangs count +1, then update the HTML element by ID for "Hangings" by 1 
         //  
-        //      if there are no "_" (For...Loop) in gameBoard and guessCount>1 then saves +1, play music and prompt used to play
-        //      which if ok'd then call gameStart ()
+        //      else there are no "_" in gameBoard and guessCount>0 then saves +1, update the HTML element by ID 
+        //      for "Gallows Saves" by 1, prompt with congratulations
+        //      
+        //      -->with either outcome above in gameEnd-->prompt user to play again and if the reply is True, 
+        //      then call function gameStart()
 
 
