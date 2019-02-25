@@ -183,12 +183,12 @@
                 function gameEnd()
         //      
         //      if there are any "_" remaining in gameBoard and guessCount=0 when this function is called, then the 
-        //      game is over and hangs count +1, then update the HTML element by ID for "Hangings" by 1 
+        //      game is over and hangs count +1 and update the HTML element by ID for "Hangings" by 1 
         //  
         //      else there are no "_" in gameBoard and guessCount>0 then saves +1, update the HTML element by ID 
         //      for "Gallows Saves" by 1, prompt with congratulations
         //      
-        //      -->with either outcome above in gameEnd-->prompt user to play again and if the reply is True, 
+        //      -->with either outcome from the above if/else-->prompt user to play again and if the reply is True, 
         //      then call function gameStart()
 
 
