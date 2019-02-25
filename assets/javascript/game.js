@@ -5,32 +5,12 @@
         //      (2) gamePlay( ) once the first guess is made and the subsequent calls per each guess
         //      (3) gameEnd() once the word is guessed or the expiration of permitted guesses, the score is tallied, song begins,
         //                      and user is promopted to play again--which calls gameStart--or not which calls exIT()
-        //      (4) exIT
         //      
-        //      variables are:
         //      
-        //      preGameHitKey: a global variable to declare it is false
-        //      wordText: string. a placeholder variable to start the game and capture whichever key is pressed
-        //      gameWord: string. the word being guesses
-        //      gameWordPos: integer. the position in the arrayGW where there's a match with the guessLetter
-        //      arrayGW : array. gameWord as a converted array
-        //      gwLength: integer. the length of arrayGW
-        //      guessCount: integer. the number of guesses allotted=gwLength+5
-        //      gameBoard: array. the array at the outset of the game is empty. per the gamePlay function it is dynamically 
-        //                          created per the gwLength. It appears at the outset as a collectiono of "_" per gwLength
-        //                           and then dynamically changes on guessed if there are matches with arrayGW
-        //
-        //      guessLetter: variant. the letter guessed after the gamePlay() is called and completed it is changed to empty
-        //      missLetter: variant. the collection of letters that missed on guesses
-        //      i : integer. used in For...Loops
-        //      j : integer. used in For...Loops
-        //      saves: integer. counter of saves per correct guessting of the word
-        //      hangMan: integer. counter of losses per not guessing of the word...the man is hanged
-        //      
-        //
-        //      (1.1) function gameStart which begins with delaring/initializing all variables as reset from prior game
-
                 function gameStart(){
+        //      (1.1) function gameStart which begins with delaring/initializing all variables as reset from prior game
+        //
+        //      ariables are:   
 
                 var wordText = "";
                 var gameWord = "";
@@ -113,7 +93,8 @@
 
         //      (2) gamePlay()
         //
-                
+                function gamePlay()
+
                 alert("This is Hip Hop Hangman. Words are selected at random from titles of my favorite songs. Guess a letter to begin but be mindful of how many guess attempts you have renaining!");
 
                 // document.onkeyup = function uniKeyCode(event) {
@@ -143,7 +124,6 @@
         //              
         //      for(x=0; x<missLetter.length; x++){
         //                      
-        //      --> need to develop an in-game penalty of -1 guessCount when guessing the same letter 3x or more times
         //              if(guessLetter == missLetter[i]){
         //        
         //                      alert("The entry has already been played and was incorrect. Please choose again.")};
@@ -199,6 +179,8 @@
         //       
         //
         //      (3) gameEnd
+        //
+                function gameEnd()
         //      
         //      if there are any "_" remaining in gameBoard and guessCount=0 when this function is called, then the 
         //      game is over and hangs count +1, then update the HTML element by ID for "Hangings" by 1 
