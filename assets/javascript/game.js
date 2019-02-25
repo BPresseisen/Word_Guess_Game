@@ -1,4 +1,4 @@
-// document.body.innerHTML = randomItem;
+        // document.body.innerHTML = randomItem;
 
         //      Four (4) Functions 
         //      (1) gameStart() when the game begins, clears variables, establishes the gameWord randomly, and sets-up gameBoard
@@ -9,6 +9,8 @@
         //      
         //      variables are:
         //      
+        //      preGameHitKey: a global variable to declare it is false
+        //      wordText: string. a placeholder variable to start the game and capture whichever key is pressed
         //      gameWord: string. the word being guesses
         //      gameWordPos: integer. the position in the arrayGW where there's a match with the guessLetter
         //      arrayGW : array. gameWord as a converted array
@@ -25,71 +27,98 @@
         //      saves: integer. counter of saves per correct guessting of the word
         //      hangMan: integer. counter of losses per not guessing of the word...the man is hanged
         //      
-        //      ......
         //
-        //      (1) gameStart()
-
-                function gameStart{
-
         //      (1.1) All variables are reset from prior play
 
-                    var gameWord = "";
-                    var gameWordPos = null;
-                    var arrayGW = [];
-                    var gameArray = ["microphone","bells","zoo","fiend","pause", "manifest", "protect","funk","award",
-                                    "buddy", "business","chorus","wrath","express","infinity", "arena","junkies","paper",
-                                    "hypnotize","lesson","vivrant","control","songs","taxing", "riches","butcher",
-                                    "symphony","risk", "crimina", "philosophy", "bridge"];
-                    var gwLength = 0;
-                    var guessCount = 0;
-                    var gameBoard = [];
-                    var gameBoardStr=""
-                    var guessLetter = "";
-                    var missLetter = [];
-                    var missLetterStr = "";
-                    var i = null;
-                    var j = null;
-                    var saves = 0
-                    var hangs = 0
-
-        //      
-        //      // variables that hold place in html
-        //      var wordText = document.getElementById("word");
-        //
-        //      //document.onkeyup = function(event) {
-        //      alert("game is starting")
-        //     
+                var wordText = "";
+                var gameWord = "";
+                var gameWordPos = null;
+                var arrayGW = [];
+                var gwLength = 0;
+                var guessCount = 0;
+                var gameBoard = [];
+                var gameBoardStr = "";
+                var guessLetter = "";
+                var missLetter = [];
+                var missLetterStr = "";
+                var i = null;
+                var j = null;
+                var saves = 0
+                var hangs = 0
+        
+                //      
         //      (1.2) The collection of Game words
         //      
-        //      
+                var gameArray = ["microphone","bells","zoo","fiend","pause", "manifest","protect","funk","award",
+                            "buddy", "business","chorus","wrath","express","infinity", "arena","junkies","paper",
+                            "hypnotize","lesson","vivrant","control","songs","taxing", "riches","butcher",
+                            "symphony","risk", "criminal", "philosophy", "bridge"];
+
         //      (1.3) Set gameWord from gameArray
-        //      var gameWord = myArray[Math.floor(Math.random()*myArray.length)]; 
-        //      
+               
+                var gameWord = gameArray[Math.floor(Math.random()*gameArray.length)]; 
+
+                console.log(gameWord);
+                
         //      (1.4) Run Split Method 
         //      After variarbles are reset, change gameword into an array, arrayGW, using the split. method to separate 
         //      each letter of gameWord by a comma
+                
+                var arrayGW = gameWord.split("");
+                console.log(arrayGW);
+               
         //      
         //      (1.5) Find Length of arrayGW and defne length as an integer, gwLength
-        //
-        //      -->example gameWord is "microphone", arrayGW=[m,i,c,r,o,p,h,o,n,e] ad gWlength is 10
-        //
-        //      define guessCount as an integer where guessCount = gwlength+5, per the above example example guessCount is 15
-        //
+                
+                var gwLength = arrayGW.length;
+                var guessCount = gwLength+5;
+
         //      (1.6) Create gameBoard
-        //  
-        //      Use a For...Loop to create an array, gameBoard, whose values are comprosed of the  "_" spots needed to fill-in 
-        //      correct guesses. 
-        //
-        //      per the above example, gameBoard would appear as _ _ _ _ _ _ _ _ _ _ for 'microphone" being of length 10 and the 
-        //      For...Loop running through 10 times (i=0 through 9)
-        //      
-        //      then, gameBoard would dynamically edit in real-time per the guesses...
-        //
+                
+                var gameBoard = ["_"]
+
+                for(var i=0; i<gwLength-1;i++){
+
+                        gameBoard.push("_");
+
+                }       
+
+                var gameBoardStr = gameBoard.toString();
+
+                for(var i=0; i<gwLength-1;i++){
+
+                        var gameBoardStr = gameBoardStr.replace(","," ");
+
+                }
+
+                console.log(gameBoard);
+                console.log(gameBoardStr);
+
+                document.getElementById("correct_letters").innerHTML=gameBoardStr;
+                // document.getElementById("guess-remain").innerHTML=guessCount;
+
         //      (2) gamePlay()
         //
         //      when a guessLetter is played, two (2) For...Loops with a nested If...Else to determine if guessletter is in the
         //      missLetter or gameBoard already...if it is in either case, then an alert to inform the player of this event.
-        //      
+                
+                alert("This is Hip Hop Hangman. Words are selected at random from titles of my favorite songs. Guess a letter to begin but be mindful of how many guess attempts you have renaining!");
+
+                // document.onkeyup = function uniKeyCode(event) {
+
+                // var j = event.keyCode;
+
+                // //the inputted-key is evaluated to be an alpha key, otherwise an alert is shown to pick another key
+                // if (j > 90 || j < 57) {
+                //         alert("You pressed an incorrect key. Please choose a letter from a to z.");
+                // } else {
+
+                // var guessLetter = event.key.toLowerCase();
+                // console.log(guessLetter);
+
+                //     //when a letter that is pressed, for the entirety of the word, check if it matches one of the letters 
+                //     var matchLetter = function (randomLetter) {
+                //         var letterMatch = false;
         //      if guessLetter 
         //
         //      if the guessLetter <> gameBoard and guessLetter is <> missLetter, then it is a missed guess and two operations
