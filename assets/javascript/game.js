@@ -28,7 +28,9 @@
         //      hangMan: integer. counter of losses per not guessing of the word...the man is hanged
         //      
         //
-        //      (1.1) All variables are reset from prior play
+        //      (1.1) function gameStart which begins with delaring/initializing all variables as reset from prior game
+
+                function gameStart(){
 
                 var wordText = "";
                 var gameWord = "";
@@ -36,17 +38,25 @@
                 var arrayGW = [];
                 var gwLength = 0;
                 var guessCount = 0;
-                var gameBoard = [];
+                var gameBoard = [])
                 var gameBoardStr = "";
                 var guessLetter = "";
                 var missLetter = [];
                 var missLetterStr = "";
                 var i = null;
                 var j = null;
-                var saves = 0
-                var hangs = 0
+ 
+        //      
+                if(typeof(saves) != "undefined" && typeof(hangs) !="undefined"){
+                
+                // For the very first time the game starts--set saves to 0 otherwise, preserve saves and hangs above
+                else()
+                
+                        var saves = 0
+                        var hangs = 0
+                }
         
-                //      
+        //      
         //      (1.2) The collection of Game words
         //      
                 var gameArray = ["microphone","bells","zoo","fiend","pause", "manifest","protect","funk","award",
@@ -97,6 +107,8 @@
                 document.getElementById("correct_letters").innerHTML=gameBoardStr;
                 // document.getElementById("guess-remain").innerHTML=guessCount;
 
+                }
+
         //      (2) gamePlay()
         //
         //      when a guessLetter is played, two (2) For...Loops with a nested If...Else to determine if guessletter is in the
@@ -113,41 +125,44 @@
                 //         alert("You pressed an incorrect key. Please choose a letter from a to z.");
                 // } else {
 
-                // var guessLetter = event.key.toLowerCase();
+                // var guessLetter = event.key.toLowerCase());
                 // console.log(guessLetter);
 
-                //     //when a letter that is pressed, for the entirety of the word, check if it matches one of the letters 
-                //     var matchLetter = function (randomLetter) {
-                //         var letterMatch = false;
-        //      if guessLetter 
-        //
-        //      if the guessLetter <> gameBoard and guessLetter is <> missLetter, then it is a missed guess and two operations
-        //      occur: guessCount-1 and the guesslLetter is added (push) into missLetter array. 
-        //
-        //      the HTML element must be refreshed after the guessLetter push into missLetter so the missed guess appears
-        //      onscreen for the user
-        //
-        //      If guessCount goes to 0 then call gameEnd()
-        //       
-        //      if guessCount >0 AND guessLetter <> missLetter AND guessLetter <>gameboard, then guessLetter runs through a 
-        //      For...Loop with a nested If...Else to determine where it matches a letter in the arrayGW 
-        //      
-        //      In gameBoard, at the same position-number where guessLetter matches arrayGW, the existing "_" would change to 
-        //      the to the matched letter. 
+        //      when a letter that is pressed, for the entirety of the word, check if it matches one of the letters 
+        //      for(i=0; i<arrayGW.length-1;i++){
         //  
-        //      -->For example, if guessLetter = "o" 
         //
-        //      The first match is found at i=4 between arrayGW and guessLetter, gameBoard edits at that postion, as well.
-        //      Per the example--> the at position j=4 in gameBoard changes from "_" to "o" 
-        //          
-        //      The For...Loop continues and finds another match at i=7 and the above gameBoard edit happens again.
+        //              IF THE LETTER HAS ALREADY BEEN PLAYED
+        //              if (guessLetter letter already in gameBoard || guessLetter already in incorrect-letters array){
+        //                      prompt("The letter___ is already in-play. Please choose again.)
         //
-        //      In both matches the HTML object with the text for gameBoard would also need refreshing so that onscreen, the 
-        //      players sees the following:
+        //              --> really would like to create an in-game counter that penalizes the player for guessing the 
+        //                      same letter 3x or more
         //
-        //      _ _ _ _ o _ _ o _ _
-        //      
-        //      Another guess is tendered and gamePlay() is called and so on and so forth...
+        //              }
+        //              ELSE guessLetter EQUALS an indexed position in the array
+        //              else (guessLetter == arrayGW[i]){
+        //              
+        //              (a) perform replace method on gameBoard to swap the existing "_" in the matching indexed spot of
+        //              the array (b) programmatically change the HTML element by ID to reflect the update spelling of
+        //              the gameBoard
+        //              } 
+        //
+        //              ELSE guessLetter is incorrect
+        //              else(guessLetter <> arrayGW[i]){
+        //              
+        //
+        //              (a) add letter to incorrect letters array, (b) programmatically change the HTML element by ID
+        //               to reflect the updated list of incorrect letters and; (c) reduce the guessCount by 1
+
+        //              }
+        //     
+        //      Need more if(){}else(){} statements here to accomplish the follwing:
+        //
+        //              (1) if (guessCount goes to 0) then call gameEnd(){}
+        //              (2) else(most recent guessLetter completes the word, call gameEnd()){}
+        //              (3) else(guess again-->call the function gamePlay() until (1) or (2) are satisfied){}
+        //       
         //
         //      (3) gameEnd
         //      
@@ -156,8 +171,5 @@
         //  
         //      if there are no "_" (For...Loop) in gameBoard and guessCount>1 then saves +1, play music and prompt used to play
         //      which if ok'd then call gameStart ()
-        //  
-        //      (4) exIT
-        // 
-        //       If reply to prompt to play again in gameEnd is FALSE, exit program
+
 
