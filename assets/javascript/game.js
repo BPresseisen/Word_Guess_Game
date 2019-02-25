@@ -10,7 +10,7 @@
                 function gameStart(){
         //      (1.1) function gameStart which begins with delaring/initializing all variables as reset from prior game
         //
-        //      ariables are:   
+        //      variables are:   
 
                 var wordText = "";
                 var gameWord = "";
@@ -18,7 +18,7 @@
                 var arrayGW = [];
                 var gwLength = 0;
                 var guessCount = 0;
-                var gameBoard = [])
+                var gameBoard = []
                 var gameBoardStr = "";
                 var guessLetter = "";
                 var missLetter = [];
@@ -29,12 +29,10 @@
  
         //      
                 if(typeof(saves) != "undefined" && typeof(hangs) !="undefined"){
-                
-                // For the very first time the game starts--set saves to 0 otherwise, preserve saves and hangs above
-                else()
-                
                         var saves = 0
                         var hangs = 0
+                // For the very first time the game starts--set saves to 0 otherwise, preserve saves and hangs above
+            
                 }
         
         //      
@@ -87,24 +85,19 @@
                 console.log(gameBoardStr);
 
                 document.getElementById("correct_letters").innerHTML=gameBoardStr;
-                // document.getElementById("guess-remain").innerHTML=guessCount;
-
-                }
-
-        //      (2) gamePlay()
-        //
-                function gamePlay()
+                document.getElementById("guess-remain").innerHTML=guessCount;
 
                 alert("This is Hip Hop Hangman. Words are selected at random from titles of my favorite songs. Guess a letter to begin but be mindful of how many guess attempts you have renaining!");
+               
 
-                // document.onkeyup = function uniKeyCode(event) {
-
-                // var j = event.keyCode;
+                document.onkeyup = function(event) {
+               
+                var j = event.keyCode;
 
                 // //the inputted-key is evaluated to be an alpha key, otherwise an alert is shown to pick another key
-                // if (j > 90 || j < 57) {
-                //         alert("You pressed an incorrect key. Please choose a letter from a to z.");
-                // } else {
+                if (j > 90 || j < 57) {
+                alert("You pressed an incorrect key. Please choose a letter from a to z.");
+                } else {
 
                 // var guessLetter = event.key.toLowerCase());
                 // console.log(guessLetter);
@@ -141,7 +134,7 @@
         //              guessLetter is CORRECT
         //              if(guessLetter == arrayGW[i]){
 
-        //                      gameBoard.splice(i,0,guessLetter)
+        //                      gameBoard.splice(i,0,guessLetter);
         //                      gameBoardStr = gameBoard.toString();
         //                      console.log(gameBoard);
         //                      console.log(gameBoardStr);
@@ -180,7 +173,7 @@
         //
         //      (3) gameEnd
         //
-                function gameEnd()
+                // function gameEnd()
         //      
         //      if there are any "_" remaining in gameBoard and guessCount=0 when this function is called, then the 
         //      game is over and hangs count +1 and update the HTML element by ID for "Hangings" by 1 
@@ -191,4 +184,7 @@
         //      -->with either outcome from the above if/else-->prompt user to play again and if the reply is True, 
         //      then call function gameStart()
 
+        //      document.onkeyup = function gameStart(event)) {}
 
+             }
+        }
