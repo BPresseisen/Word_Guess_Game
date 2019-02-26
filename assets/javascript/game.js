@@ -49,7 +49,7 @@ function gameStart() {
 
         //      (1.4) Create gameBoard
 
-        gameBoard = ["_"]
+        gameBoard = ["_"];
 
         for (var i = 0; i < gwLength - 1; i++) {
 
@@ -71,22 +71,39 @@ function gameStart() {
         document.getElementById("correct_letters").innerHTML = gameBoardStr;
         document.getElementById("guess-remain").innerHTML = guessCount;
 
-        alert("This is Hip Hop Hangman. Words are selected at random from titles of my favorite songs. Guess a letter to begin but be mindful of how many guess attempts you have renaining!");
+        alert("This is Hip Hop Hangman. Words are selected at random from titles of my favorite songs. Guess a letter to begin but be mindful of how many guess attempts you have remaining!");
 
 }
 
 gameStart();
 
+function gameEnd(){
+
+        if(guessCount=0){
+
+                alert("You hanged an emcee with the mic cord. How many emcees must get dissed?");
+                hangs++;
+                
+        }else{
+
+                alert("Hip Hop Hooray! You saved an emcee from the gallows.");
+                saves++;
+
+        }
+        gameStart();
+
+};
+
 document.onkeyup = function (event) {
 
-        var j = event.keyCode;
+        j = event.keyCode;
 
         //      the inputted-key is evaluated to be an alpha key, otherwise an alert is shown to pick another key
-        if (j > 90 || j < 57) {
+        if (j > 90 || j < 57){
                 alert("You pressed an incorrect key. Please choose a letter from a to z.");
-        } else {
+        } else{
 
-                var guessLetter = event.key.toLowerCase()
+                guessLetter = event.key.toLowerCase();
                 console.log(guessLetter);
         }
 
@@ -97,24 +114,24 @@ document.onkeyup = function (event) {
                 //
                 for (j = 0; j < gameBoard.length; j++) {
 
-                        if (guessletter == gameBoard[i]) {
+                        if (guessletter == gameBoard[j]) {
 
                                 alert("The entrty is already on the game board. Please choose again.")
                         }
 
                 };
         };
-        //              
+                    
         for (x = 0; x < missLetter.length; x++) {
 
-                if (guessLetter == missLetter[i]) {
+                if (guessLetter == missLetter[x]) {
 
                         alert("The entry has already been played and was incorrect. Please choose again.")
                 };
 
 
         };
-        //      
+         
         //      WHEN guessLetter EQUALS AN INDEXED VALUE IN arrayGW
         //      (a) perform replace method on gameBoard to swap the existing "_" in the matching indexed spot of the 
         //      array AND (b) programmatically edit the HTML element by ID to reflect the updated missing/showing on 
@@ -131,49 +148,27 @@ document.onkeyup = function (event) {
                         console.log(gameBoardStr);
 
                         document.getElementById("correct_letters").innerHTML = gameBoardStr;
-                        //                      
+                                  
                         //      OR WHEN IT DOES NOT (missLetter)
-                        //
+                
                         //     ELSE guessLetter is INCORRECT
-                } else (guessLetter !== arrayGW[i]) {
+                } else (guessLetter !== arrayGW[i]){
                           
-                        missLetter.push(guessletter & " ")
-                        missLetterStr = missLetters.toString
+                        missLetter.push(guessletter & " ");
+                        missLetterStr = missLetter.toString;
                         document.getElementById("incorrect_letters").innerHTML = missLetterStr;
 
-                        guessCount--
-                        document.getElementById("guess-remain").innerHTML = guessCount
+                        guessCount--;
+                        document.getElementById("guess-remain").innerHTML = guessCount;
                 };
+
+
+                if(guessCount=0 || gameBoard.search("_")==-1) {
+
+                        gameEnd();
+                };
+
         };
-        //      
-        //              
-        //      Need more if(){}else(){} statements here to accomplish the follwing:
-        //
-        //              (1) if (guessCount goes to 0) then call gameEnd(){}
-        //              if(guessCount=0){
-        //
-        //                 gameEnd()
-        //
-        //              }
-        //              (2) else(most recent guessLetter completes the word, call gameEnd()){}
-        //
-        //              (3) else(guess again-->call the function gamePlay() until (1) or (2) are satisfied){}
-        //       
-        //
-        //      (3) gameEnd
-        //
-        // function gameEnd()
-        //      
-        //      if there are any "_" remaining in gameBoard and guessCount=0 when this function is called, then the 
-        //      game is over and hangs count +1 and update the HTML element by ID for "Hangings" by 1 
-        //  
-        //      else there are no "_" in gameBoard and guessCount>0 then saves +1, update the HTML element by ID 
-        //      for "Gallows Saves" by 1, prompt with congratulations
-        //      
-        //      -->with either outcome from the above if/else-->prompt user to play again and if the reply is True, 
-        //      then call function gameStart()
 
-        //      document.onkeyup = function gameStart(event)) {}
-
-}
+};
 
