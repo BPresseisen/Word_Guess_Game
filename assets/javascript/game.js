@@ -1,161 +1,150 @@
-        // document.body.innerHTML = randomItem;
+// document.body.innerHTML = randomItem;
 
-        //      Four (4) Functions 
-        //      (1) gameStart() when the game begins, clears variables, establishes the gameWord randomly, and sets-up gameBoard
-        //      (2) gamePlay( ) once the first guess is made and the subsequent calls per each guess
-        //      (3) gameEnd() once the word is guessed or the expiration of permitted guesses, the score is tallied, song begins,
-        //                      and user is promopted to play again--which calls gameStart--or not which calls exIT()
-        //      
-        //      
-                function gameStart(){
-        //      (1.1) function gameStart which begins with delaring/initializing all variables as reset from prior game
-        //
-        //      variables are:   
+//      Four (4) Functions 
+//      (1) gameStart() when the game begins, clears variables, establishes the gameWord randomly, and sets-up gameBoard
+//      (2) gamePlay( ) once the first guess is made and the subsequent calls per each guess
+//      (3) gameEnd() once the word is guessed or the expiration of permitted guesses, the score is tallied, song begins,
+//                      and user is promopted to play again--which calls gameStart--or not which calls exIT()
+//      
+//      
 
-                var wordText = "";
-                var gameWord = "";
-                var gameWordPos = null;
-                var arrayGW = [];
-                var gwLength = 0;
-                var guessCount = 0;
-                var gameBoard = []
-                var gameBoardStr = "";
-                var guessLetter = "";
-                var missLetter = [];
-                var missLetterStr = "";
-                var i = null;
-                var j = null;
-                var x = null;
- 
-        //      
-                if(typeof(saves) != "undefined" && typeof(hangs) !="undefined"){
-                        var saves = 0
-                        var hangs = 0
-                // For the very first time the game starts--set saves to 0 otherwise, preserve saves and hangs above
-            
-                }
-        
-        //      
-        //      (1.2) The collection of Game words
-        //      
-                var gameArray = ["microphone","bells","zoo","fiend","pause", "manifest","protect","funk","award",
-                            "buddy", "business","chorus","wrath","express","infinity", "arena","junkies","paper",
-                            "hypnotize","lesson","vivrant","control","songs","taxing", "riches","butcher",
-                            "symphony","risk", "criminal", "philosophy", "bridge"];
+var gameArray = ["microphone", "bells", "zoo", "fiend", "pause", "manifest", "protect", "funk", "award",
+"buddy", "business", "chorus", "wrath", "express", "infinity", "arena", "junkies", "paper",
+"hypnotize", "lesson", "vivrant", "control", "songs", "taxing", "riches", "butcher",
+"symphony", "risk", "criminal", "philosophy", "bridge"];
 
-        //      (1.3) Set gameWord from gameArray
-               
-                var gameWord = gameArray[Math.floor(Math.random()*gameArray.length)]; 
+var gameWord = "";
+var arrayGW = [];
+var gwLength = 0;
+var guessCount = 0;
+var gameBoard = []
+var gameBoardStr = "";
+var guessLetter = "";
+var missLetter = [];
+var missLetterStr = "";
+var saves = 0;
+var hangs = 0;
 
-                console.log(gameWord);
-                
-        //      (1.4) Run Split Method 
+function gameStart() {
+
+        //      (1.1) Set gameWord from gameArray
+
+        gameWord = gameArray[Math.floor(Math.random() * gameArray.length)];
+
+        console.log(gameWord);
+
+        //      (1.2) Run Split Method 
         //      After variarbles are reset, change gameword into an array, arrayGW, using the split. method to separate 
         //      each letter of gameWord by a comma
-                
-                var arrayGW = gameWord.split("");
-                console.log(arrayGW);
-               
+
+        arrayGW = gameWord.split("");
+        console.log(arrayGW);
+
         //      
-        //      (1.5) Find Length of arrayGW and defne length as an integer, gwLength
-                
-                var gwLength = arrayGW.length;
-                var guessCount = gwLength+5;
-                document.getElementById("guess-remain").innerHTML=guessCount;
+        //      (1.3) Find Length of arrayGW and defne length as an integer, gwLength
 
-        //      (1.6) Create gameBoard
-                
-                var gameBoard = ["_"]
+        gwLength = arrayGW.length;
+        guessCount = gwLength + 5;
+        document.getElementById("guess-remain").innerHTML = guessCount;
 
-                for(var i=0; i<gwLength-1;i++){
+        //      (1.4) Create gameBoard
 
-                        gameBoard.push("_");
+        gameBoard = ["_"]
 
-                }       
+        for (var i = 0; i < gwLength - 1; i++) {
 
-                var gameBoardStr = gameBoard.toString();
+                gameBoard.push("_");
 
-                for(var i=0; i<gwLength-1;i++){
+        }
 
-                        var gameBoardStr = gameBoardStr.replace(","," ");
+        var gameBoardStr = gameBoard.toString();
 
-                }
+        for (var i = 0; i < gwLength - 1; i++) {
 
-                console.log(gameBoard);
-                console.log(gameBoardStr);
+                gameBoardStr = gameBoardStr.replace(",", " ");
 
-                document.getElementById("correct_letters").innerHTML=gameBoardStr;
-                document.getElementById("guess-remain").innerHTML=guessCount;
+        }
 
-                alert("This is Hip Hop Hangman. Words are selected at random from titles of my favorite songs. Guess a letter to begin but be mindful of how many guess attempts you have renaining!");
-               
+        console.log(gameBoard);
+        console.log(gameBoardStr);
 
-                document.onkeyup = function(event) {
-               
-                var j = event.keyCode;
+        document.getElementById("correct_letters").innerHTML = gameBoardStr;
+        document.getElementById("guess-remain").innerHTML = guessCount;
 
-                // //the inputted-key is evaluated to be an alpha key, otherwise an alert is shown to pick another key
-                if (j > 90 || j < 57) {
+        alert("This is Hip Hop Hangman. Words are selected at random from titles of my favorite songs. Guess a letter to begin but be mindful of how many guess attempts you have renaining!");
+
+}
+
+gameStart();
+
+document.onkeyup = function (event) {
+
+        var j = event.keyCode;
+
+        //      the inputted-key is evaluated to be an alpha key, otherwise an alert is shown to pick another key
+        if (j > 90 || j < 57) {
                 alert("You pressed an incorrect key. Please choose a letter from a to z.");
-                } else {
+        } else {
 
-                // var guessLetter = event.key.toLowerCase());
-                // console.log(guessLetter);
+                var guessLetter = event.key.toLowerCase()
+                console.log(guessLetter);
+        }
 
         //      when a letter that is pressed, for the entirety of the word, check if it matches one of the letters 
-        //      for(i=0; i<arrayGW.length-1;i++){
-        //  
-        //      WHEN guessLetter HAS ALREADY BEEN PLAYED
-        //
-        //      for(j=0; x<gameBoard.length; j++){
+        for (i = 0; i < arrayGW.length - 1; i++) {
+                //  
+                //      WHEN guessLetter HAS ALREADY BEEN PLAYED
+                //
+                for (j = 0; j < gameBoard.length; j++) {
+
+                        if (guessletter == gameBoard[i]) {
+
+                                alert("The entrty is already on the game board. Please choose again.")
+                        }
+
+                };
+        };
         //              
-        //              if(guessletter == gameBoard[i]){
-        //                      
-        //                      alert("The entrty is already on the game board. Please choose again.")};      
-        //
-        //              }
-        //              
-        //      for(x=0; x<missLetter.length; x++){
-        //                      
-        //              if(guessLetter == missLetter[i]){
-        //        
-        //                      alert("The entry has already been played and was incorrect. Please choose again.")};
-        //      
-        //
-        //      }
+        for (x = 0; x < missLetter.length; x++) {
+
+                if (guessLetter == missLetter[i]) {
+
+                        alert("The entry has already been played and was incorrect. Please choose again.")
+                };
+
+
+        };
         //      
         //      WHEN guessLetter EQUALS AN INDEXED VALUE IN arrayGW
         //      (a) perform replace method on gameBoard to swap the existing "_" in the matching indexed spot of the 
         //      array AND (b) programmatically edit the HTML element by ID to reflect the updated missing/showing on 
         //      the gameBoard
         //
-        //      for(i=0; i<arrayGW.length-1;i++){
-        //              
-        //              guessLetter is CORRECT
-        //              if(guessLetter == arrayGW[i]){
+        for (i = 0; i < arrayGW.length - 1; i++) {
 
-        //                      gameBoard.splice(i,0,guessLetter);
-        //                      gameBoardStr = gameBoard.toString();
-        //                      console.log(gameBoard);
-        //                      console.log(gameBoardStr);
-        //
-        //                      document.getElementById("correct_letters").innerHTML=gameBoardStr;
-        //      
-        //      OR WHEN IT DOES NOT (missLetter)
-        //      (a) add letter to incorrect letters array, (b) programmatically change the HTML element by ID
-        //       to reflect the updated list of incorrect letters and; (c) reduce the guessCount by 1
-        //
-        //              ELSE guessLetter is INCORRECT
-        //              }else(guessLetter <> arrayGW[i]){
-        //                      
-        //                      missLetter.push(guessletter & " ")
-        //                      missLetterStr = missLetters.toString
-        //                      document.getElementById("incorrect_letters").innerHTML=missLetterStr;
-        //                      
-        //                      guessCount--
-        //                      document.getElementById("guess-remain").innerHTML=guessCount
-        //              }
-        //      };
+                //      guessLetter is CORRECT
+                if (guessLetter == arrayGW[i]) {
+
+                        gameBoard.splice(i, 0, guessLetter);
+                        gameBoardStr = gameBoard.toString();
+                        console.log(gameBoard);
+                        console.log(gameBoardStr);
+
+                        document.getElementById("correct_letters").innerHTML = gameBoardStr;
+                        //                      
+                        //      OR WHEN IT DOES NOT (missLetter)
+                        //
+                        //     ELSE guessLetter is INCORRECT
+                } else (guessLetter !== arrayGW[i]) {
+                          
+                        missLetter.push(guessletter & " ")
+                        missLetterStr = missLetters.toString
+                        document.getElementById("incorrect_letters").innerHTML = missLetterStr;
+
+                        guessCount--
+                        document.getElementById("guess-remain").innerHTML = guessCount
+                };
+        };
         //      
         //              
         //      Need more if(){}else(){} statements here to accomplish the follwing:
@@ -173,7 +162,7 @@
         //
         //      (3) gameEnd
         //
-                // function gameEnd()
+        // function gameEnd()
         //      
         //      if there are any "_" remaining in gameBoard and guessCount=0 when this function is called, then the 
         //      game is over and hangs count +1 and update the HTML element by ID for "Hangings" by 1 
@@ -186,5 +175,5 @@
 
         //      document.onkeyup = function gameStart(event)) {}
 
-             }
-        }
+}
+
