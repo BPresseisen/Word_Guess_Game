@@ -1,6 +1,6 @@
 // document.body.innerHTML = randomItem;
 
-//      Four (4) Functions 
+//      three (3) Functions 
 //      (1) gameStart() when the game begins, clears variables, establishes the gameWord randomly, and sets-up gameBoard
 //      (2) gamePlay( ) once the first guess is made and the subsequent calls per each guess
 //      (3) gameEnd() once the word is guessed or the expiration of permitted guesses, the score is tallied, song begins,
@@ -20,8 +20,9 @@ var guessCount = 0;
 var gameBoard = []
 var gameBoardStr = "";
 var guessLetter = "";
-var missLetter = [];
+var missLetter=[];
 var missLetterStr = "";
+var guessCorrectness = false;
 var saves = 0;
 var hangs = 0;
 
@@ -49,23 +50,33 @@ function gameStart() {
 
         //      (1.4) Create gameBoard
 
+        console.log(gameBoard);
+
         gameBoard = ["_"];
+
+        console.log(gameBoard);
 
         for (var i = 0; i < gwLength - 1; i++) {
 
                 gameBoard.push("_");
+                console.log(gameBoard);
 
-        }
+        };
 
-        var gameBoardStr = gameBoard.toString();
+        console.log("gameboard is " + gameBoard.join(" "));
 
-        for (var i = 0; i < gwLength - 1; i++) {
+        // var gameBoardStr = gameBoard.toString();
+        var gameBoardStr = gameBoard.join(" ");
+        console.log(gameBoardStr);
 
-                gameBoardStr = gameBoardStr.replace(",", " ");
+        // for (var i = 0; i < gwLength - 1; i++) {
 
-        }
+        //         gameBoardStr = gameBoardStr.join(" ");
+
+        // }
 
         console.log(gameBoard);
+        console.log(gameBoard.join(" ")); 
         console.log(gameBoardStr);
 
         document.getElementById("correct_letters").innerHTML = gameBoardStr;
@@ -73,23 +84,28 @@ function gameStart() {
 
         alert("This is Hip Hop Hangman. Words are selected at random from titles of my favorite songs. Guess a letter to begin but be mindful of how many guess attempts you have remaining!");
 
-}
+};
 
 gameStart();
 
 function gameEnd(){
 
-        if(guessCount=0){
+        if(guessCount===0){
 
                 alert("You hanged an emcee with the mic cord. How many emcees must get dissed?");
                 hangs++;
+                document.getElementById("hangs").innerHTML =hangs;
+
                 
         }else{
 
                 alert("Hip Hop Hooray! You saved an emcee from the gallows.");
                 saves++;
+                document.getElementById("g-saves").innerHTML=saves;
 
-        }
+        };
+        
+        document.getElementById("incorrect_letters").innerHTML = "";
         gameStart();
 
 };
@@ -97,78 +113,90 @@ function gameEnd(){
 document.onkeyup = function (event) {
 
         j = event.keyCode;
+        guessCorrectness=false;
 
         //      the inputted-key is evaluated to be an alpha key, otherwise an alert is shown to pick another key
         if (j > 90 || j < 57){
                 alert("You pressed an incorrect key. Please choose a letter from a to z.");
+                
         } else{
 
                 guessLetter = event.key.toLowerCase();
                 console.log(guessLetter);
+        
         }
 
         //      when a letter that is pressed, for the entirety of the word, check if it matches one of the letters 
-        for (i = 0; i < arrayGW.length - 1; i++) {
+        
                 //  
                 //      WHEN guessLetter HAS ALREADY BEEN PLAYED
-                //
-                for (j = 0; j < gameBoard.length; j++) {
 
-                        if (guessletter == gameBoard[j]) {
+        for (j = 0; j < gameBoard.length; j++) {
 
-                                alert("The entrty is already on the game board. Please choose again.")
-                        }
+                if (guessLetter == gameBoard[j]) {
 
-                };
-        };
-                    
-        for (x = 0; x < missLetter.length; x++) {
+                        alert("The entrty is already on the game board. Please choose again.")
+                        break;
+                }
 
-                if (guessLetter == missLetter[x]) {
-
-                        alert("The entry has already been played and was incorrect. Please choose again.")
-                };
-
+                
 
         };
          
-        //      WHEN guessLetter EQUALS AN INDEXED VALUE IN arrayGW
-        //      (a) perform replace method on gameBoard to swap the existing "_" in the matching indexed spot of the 
-        //      array AND (b) programmatically edit the HTML element by ID to reflect the updated missing/showing on 
-        //      the gameBoard
-        //
-        for (i = 0; i < arrayGW.length - 1; i++) {
+        if(missLetterStr.length>0){
 
-                //      guessLetter is CORRECT
-                if (guessLetter == arrayGW[i]) {
+                for (x = 0; x < missLetter.length; x++) {
 
-                        gameBoard.splice(i, 0, guessLetter);
-                        gameBoardStr = gameBoard.toString();
-                        console.log(gameBoard);
-                        console.log(gameBoardStr);
+                        if (guessLetter == missLetter[x]) {
 
-                        document.getElementById("correct_letters").innerHTML = gameBoardStr;
-                                  
-                        //      OR WHEN IT DOES NOT (missLetter)
-                
-                        //     ELSE guessLetter is INCORRECT
-                } else (guessLetter !== arrayGW[i]){
-                          
-                        missLetter.push(guessletter & " ");
-                        missLetterStr = missLetter.toString;
-                        document.getElementById("incorrect_letters").innerHTML = missLetterStr;
-
-                        guessCount--;
-                        document.getElementById("guess-remain").innerHTML = guessCount;
-                };
-
-
-                if(guessCount=0 || gameBoard.search("_")==-1) {
-
-                        gameEnd();
+                                alert("The entry has already been played and was incorrect. Please choose again.")
+                                break;
+                        };
                 };
 
         };
 
+        for (i = 0; i < arrayGW.length; i++) {
+
+                if(guessLetter === arrayGW[i]){
+
+                        guessCorrectness=true
+                        gameBoard.splice(i, 1, guessLetter);
+                        console.log(gameBoard); 
+                        gameBoardStr = gameBoard.join(" ");
+                        console.log("gameboard " + gameBoard);
+                        console.log(gameBoardStr);
+                        document.getElementById("correct_letters").innerHTML = gameBoardStr;
+
+                }else if(guessLetter !== arrayGW[i] && (guessCorrectness===true) && i!==arrayGW.length){
+
+                        // guessCorrectness=false
+
+                }else if (guessLetter !== arrayGW[i] && i===arrayGW.length){
+
+                        guessCorrectness=false
+
+                };
+
+        };
+
+        if(guessCorrectness===false){
+
+                missLetter.push(guessLetter);
+                missLetterStr = missLetter.join(" ");
+                console.log(missLetterStr)
+                document.getElementById("incorrect_letters").innerHTML = missLetterStr;
+                guessCount--;
+                document.getElementById("guess-remain").innerHTML = guessCount;
+
+        }
+
+        console.log(gameBoard);
+        
+        if(guessCount===0 || gameBoard.indexOf("_")==-1) {
+
+                gameEnd();
+        };
 };
+
 
