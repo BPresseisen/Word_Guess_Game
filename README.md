@@ -1,6 +1,7 @@
 # Word_Guess_Game aka Hip Hop Hangman
 
-This This is Hip Hop Hangman. 
+This is Hip Hop Hangman. 
+
 Words are selected at random from the full titles of my favorite songs. 
 Guess a letter to begin but be mindful of how many guess attempts you have remaining!
 
