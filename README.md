@@ -1,9 +1,9 @@
 # Word_Guess_Game aka Hip Hop Hangman
 
-This is Hip Hop Hangman. 
+This is Hip Hop Hangman. The developer reserves the right to expect that users are familiar with traditional Hangman. However, it is always best to be prepared and account for any/all use cases. Hence, the "ABOUT THE DESIGN" delves into the particulars of how to play if needed.
 
-Words are selected at random from the full titles of my favorite songs. 
-Guess a letter to begin but be mindful of how many guess attempts you have remaining!
+In short, words are selected at random from the full titles of my favorite hip hop songs. 
+Guess a letter to begin spelling the word but be mindful of how many guess attempts remain!
 
 Future development plans include the following mods:
 
